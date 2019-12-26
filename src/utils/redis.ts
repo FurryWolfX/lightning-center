@@ -10,7 +10,7 @@ client.on("error", function(err) {
 export function addServiceToList(serviceInfo: ServiceInfo): Promise<void> {
   return new Promise(async (resolve, reject) => {
     let serviceInfoList: ServiceInfo[] = await getServiceList();
-    serviceInfoList = serviceInfoList.filter(info => info.url !== serviceInfo.url);
+    serviceInfoList = serviceInfoList.filter(info => info.name !== serviceInfo.name);
     serviceInfoList.push(serviceInfo);
     client.set("serviceInfoList", JSON.stringify(serviceInfoList), () => {
       resolve();
