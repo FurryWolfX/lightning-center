@@ -1,7 +1,7 @@
 import axios from "axios";
 import logger from "./utils/logger";
 import { ServiceInfo } from "./types";
-import client, { getServiceList, addServiceToList } from "./utils/redis";
+import { getServiceList, addServiceToList } from "./utils/redis";
 /**
  * 检测服务是否存活
  */
@@ -10,7 +10,6 @@ export default function initServiceOnlineTimer() {
     try {
       const serviceInfoList: ServiceInfo[] = await getServiceList();
       serviceInfoList.forEach(async serviceInfo => {
-        console.log(serviceInfo);
         try {
           await axios.get(serviceInfo.url + "is-service-online");
           serviceInfo.online = true;
